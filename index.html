@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>竞速拼车-赢门票</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="description" content="竞速拼车-赢门票">
+    <script>
+        //动态计算字体尺寸
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        var fz = 32 * (clientWidth / 720);
+                        fz = (fz > 32 ? 32 : fz);
+                        docEl.style.fontSize = fz + 'px';
+                        win._fz = fz;
+                    };
+            if (!doc.addEventListener) return;
+            recalc();
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+
+            window.recalc = recalc;
+        })(document, window);
+        //长链接专用
+        //        var _hmt = _hmt || [];
+        //        (function () {
+        //            var hm = document.createElement("script");
+        //            hm.src = "//hm.baidu.com/hm.js?7e0ac131f2f09d1952e26cafa158061a";
+        //            var s = document.getElementsByTagName("script")[0];
+        //            s.parentNode.insertBefore(hm, s);
+        //        })();
+        //短链接专用
+        //        var _hmt = _hmt || [];
+        //        (function () {
+        //            var hm = document.createElement("script");
+        //            hm.src = "//hm.baidu.com/hm.js?e8111e4e2c193acd79c65573f9b0a235";
+        //            var s = document.getElementsByTagName("script")[0];
+        //            s.parentNode.insertBefore(hm, s);
+        //        })();
+    </script>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://share.m.kakamobi.com/m.resources.com/share-sdk-v2.0.js"></script>
+    <script>
+        //统计通用方法
+        function sta(adsName, pageName, eventName) {
+            window.mcShare.Statistic.event(adsName + "（" + pageName + "）-" + eventName);
+//            _hmt.push([adsName, adsName + '-' + pageName + '-' + eventName]);
+        }
+        //分享配置
+        window.mcShare.shareWord('竞速拼车-赢门票', {
+                    title: '竞速拼车-赢门票',
+                    description: '竞速拼车-赢门票',
+                    iconUrl: 'http://share.m.kakamobi.com/activity.kakamobi.com/jigsaw-puzzle-car-309/img/logo.png',
+                    url: 'http://share.m.kakamobi.com/activity.kakamobi.com/jigsaw-puzzle-car-309?shareProduct=jiakaobaodian&shareKey=jigsaw-puzzle-car-309&placeKey=jigsaw-puzzle-car-309'
+                },
+                function (status) {
+                }
+        );
+    </script>
+    <!--<script src="js/global-config.js"></script>-->
+    <!--<script src="http://static.kakamobi.com/asserts/javascript/mucang.webview.v4.3.min.js"></script>-->
+</head>
+<body>
+<div class="container">
+    <!--page01-->
+    <div class="page page01 page-animate on">
+        <img class="topic" src="img/topic.png" alt="">
+        <!--<img class="sample-pic none" src="img/pic.jpg" id="src_img" alt="">-->
+        <!--<div id="scene" style="-webkit-perspective: 500px;"></div>-->
+        <img class="sample" src="img/cars.png" alt="">
+        <button type="button" class="btn btn-start">开始挑战</button>
+    </div>
+    <!--page02-->
+    <div class="page page02">
+        <div class="gap"></div>
+        <div class="title"></div>
+        <div class="swiper-container gallery">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img data-carId="29144" src="img/cb1.jpg" alt=""></div>
+                <div class="swiper-slide"><img data-carId="30568" src="img/cb2.jpg" alt=""></div>
+                <div class="swiper-slide"><img data-carId="23132" src="img/cb3.jpg" alt=""></div>
+            </div>
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <dl class="rules">
+            <dt></dt>
+            <dd><p>20S内将打乱的图块拼凑完成，即挑战成功。</p></dd>
+            <dd><p>成功试驾留资，即有机会获得2017上海国际车展门票。</p></dd>
+            <dd><p>获奖的用户我们会在活动结束的7个工作日内与您电话联系，并将门票寄给您。</p></dd>
+        </dl>
+        <button type="button" class="btn btn-challenge">我要挑战</button>
+    </div>
+    <!--page03-->
+    <div class="page page03">
+        <div class="gap"></div>
+        <div class="title"></div>
+        <div class="ques-num">
+            <ul class="timer">
+                <li>0</li>
+                <li>0</li>
+                <li class="dot">:</li>
+                <li></li>
+                <li></li>
+                <li class="sec">00</li>
+            </ul>
+        </div>
+        <div id="game-section">
+            <button id="reset" class="game-reset-btn" disabled="">重新开始</button>
+            <div class="game-box">
+                <div class="game-pop-box ui-center play" id="layer">
+                    <div class="game-warp">
+                        <div class="game-pop-hd">
+                            <h2>挑战失败！</h2>
+                            <p>再接再厉！</p>
+                        </div>
+                        <a href="javascript:;" class="game-start-btn play-btn" id="start">开始</a>
+                    </div>
+                </div>
+                <ul id="sudoku">
+                    <li><img src="" alt=""></li>
+                    <li><img src="" alt="" ></li>
+                    <li><img src="" alt=""></li>
+                    <li><img src="" alt=""></li>
+                    <li><img src="" alt=""></li>
+                    <li><img src="" alt=""></li>
+                    <li><img src="" alt=""></li>
+                    <li><img src="" alt=""></li>
+                    <li><img src="" alt=""></li>
+                </ul>
+            </div>
+            <span class="play-time" id="timing">60.00</span>
+            <p class="pages">
+                第&nbsp;<strong id="level">1</strong>&nbsp;/&nbsp;<span id="levels">3</span> 关，
+                本关限时<span id="time">60.00</span>秒
+            </p>
+        </div>
+        <button type="button" class="btn btn-ok">我拼好啦</button>
+        <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
+    </div>
+    <!--page04-->
+    <div class="page page04">
+        <div class="seperator"></div>
+        <div class="title suc"></div>
+        <img class="tickets none" src="img/tickets.png" alt="">
+        <form action="#" class="form-con">
+            <div class="prmt-plugin-promote-main">
+                <div class="info-item clearfix">
+                    <label class="label-l">*姓名：</label>
+                    <div class="label-r">
+                        <input onblur="sta('竞速拼车-赢门票', '表单页','输入姓名');" id="userName" class="ipt long" type="text"
+                               name="userName" placeholder="真实姓名"/>
+                    </div>
+                </div>
+            </div>
+            <div class="prmt-plugin-promote-main">
+                <div class="info-item clearfix">
+                    <label class="label-l">*手机：</label>
+                    <div class="label-r">
+                        <input onblur="sta('竞速拼车-赢门票', '表单页','输入手机号');" id="userPhone" class="ipt long" type="tel"
+                               placeholder="手机号码" maxlength="11"/>
+                    </div>
+                </div>
+            </div>
+            <div class="agree-txt">
+                <input type="checkbox" id="agree" checked hidden>
+                <label for="agree"></label>
+                <p>同意经销商与您联系</p>
+            </div>
+            <!--<p class="sub-txt">您的个人资料将会提交至授权经销商，将有专门负责人邀您到店沟通购车事宜。</p>-->
+            <button type="button" class="btn btn-submit">提交信息</button>
+            <button type="button" class="btn btn-retry none">再玩一次</button>
+        </form>
+    </div>
+</div>
+<!--</div>-->
+<!--<div id="pop" class="pop pop-award on">-->
+<!--<div class="pop-out">-->
+<!--<div class="pop-in fadeInUp">-->
+<!--<div class="content overflow">-->
+<!--<div class="award-inner">-->
+<!--<img src="img/1.png" alt="" class="current-point">-->
+<!--<img src="img/title02.png" alt="" class="title-suc">-->
+<!--<img src="img/c1.png" alt="" class="current-car">-->
+<!--<div class="btn-group">-->
+<!--<img class="btn btn-coupon" src="img/btn_coupon.png" alt="">-->
+<!--<img class="btn btn-retry" src="img/btn_retry.png" alt="">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<span class="js-closepop iconClose"><i>×</i></span></div>-->
+<!--</div>-->
+<!--</div>-->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+<script src="js/lib-lite.js"></script>
+<script src="js/vendor/zepto.js"></script>
+<script src="js/vendor/swiper.js"></script>
+<script src="js/vendor/TweenMax.js"></script>
+<script src="js/vendor/delaunay.js"></script>
+<script src="js/utilities.js"></script>
+<script src="js/main.js"></script>
+<!--<script>-->
+<!--// canvas settings-->
+<!--var imageWidth = 200,-->
+
+<!--imageHeight = 200;-->
+
+<!--var vertices = [],-->
+
+<!--indices,-->
+
+<!--boxes = [];-->
+
+<!--var image,-->
+
+<!--fragments = [],-->
+
+<!--container = document.getElementById('scene');-->
+
+<!--window.onload = function () {-->
+<!--image = document.getElementById('src_img');-->
+<!--if (image && container) {-->
+<!--triangulate();-->
+
+<!--makeBoxes();-->
+
+<!--makeFragments();-->
+<!--}-->
+<!--};-->
+
+<!--function triangulate() {-->
+
+<!--var x,-->
+
+<!--y,-->
+
+<!--dx = imageWidth / 5,-->
+
+<!--dy = imageHeight / 4,-->
+
+<!--offset = 1.2;-->
+
+<!--for (var i = 0; i <= imageWidth; i += dx) {-->
+
+<!--for (var j = 0; j <= imageHeight; j += dy) {-->
+
+<!--if (i && (i !== imageWidth)) x = i + randomRange(-dx * offset, dx * offset);-->
+
+<!--else x = i;-->
+
+<!--if (j && (j !== imageHeight)) y = j + randomRange(-dy * offset, dy * offset);-->
+
+<!--else y = j;-->
+
+<!--vertices.push([x, y]);-->
+
+<!--}-->
+
+<!--}-->
+
+<!--indices = Delaunay.triangulate(vertices);-->
+
+<!--}-->
+
+<!--function makeBoxes() {-->
+
+<!--var p0, p1, p2,-->
+
+<!--xMin, xMax,-->
+
+<!--yMin, yMax;-->
+
+<!--for (var i = 0; i < indices.length; i += 3) {-->
+
+<!--p0 = vertices[indices[i + 1]];-->
+
+<!--p1 = vertices[indices[i + 1]];-->
+
+<!--p2 = vertices[indices[i + 2]];-->
+
+<!--xMin = Math.min(p0[0], p1[0], p2[0]);-->
+
+<!--xMax = Math.max(p0[0], p1[0], p2[0]);-->
+
+<!--yMin = Math.min(p0[1], p1[1], p2[1]);-->
+
+<!--yMax = Math.max(p0[1], p1[1], p2[1]);-->
+
+<!--boxes.push({-->
+
+<!--x: xMin,-->
+
+<!--y: yMin,-->
+
+<!--w: xMax - xMin,-->
+
+<!--h: yMax - yMin-->
+
+<!--});-->
+
+<!--}-->
+
+<!--}-->
+
+<!--function makeFragments() {-->
+
+<!--var p0, p1, p2,-->
+
+<!--box,-->
+
+<!--fragment;-->
+
+<!--TweenMax.set(container, {perspective: 500});-->
+
+<!--var tl0 = new TimelineMax({repeat: 0});-->
+<!--for (var i = 0; i < indices.length; i += 3) {-->
+
+<!--p0 = vertices[indices[i + 0]];-->
+
+<!--p1 = vertices[indices[i + 1]];-->
+
+<!--p2 = vertices[indices[i + 2]];-->
+
+<!--box = boxes[i / 3];-->
+
+<!--fragment = new Fragment(p0, p1, p2, box);-->
+
+<!--var rx = randomRange(0, 60) * ((i % 2) ? 1 : -1);-->
+
+<!--var ry = randomRange(0, 60) * ((i % 2) ? -1 : 1);-->
+
+<!--var tl1 = new TimelineMax();-->
+
+<!--TweenMax.set(fragment.canvas, {-->
+<!--x: box.x * 2.5,-->
+<!--y: box.y,-->
+<!--alpha: 0-->
+<!--});-->
+
+<!--//            tl1.to(fragment.canvas, randomRange(0.9, 1.1), {-->
+<!--//-->
+<!--//                y: box.y,-->
+<!--////                x: box.x,-->
+<!--//                ease: Back.easeOut-->
+<!--//-->
+<!--//            });-->
+
+<!--tl1.to(fragment.canvas, 0.5, {-->
+
+<!--z: -100,-->
+
+<!--ease: Cubic.easeIn,-->
+
+<!--//                delay: 0.4-->
+
+<!--});-->
+
+<!--tl1.to(fragment.canvas, randomRange(.5, 2), {-->
+
+<!--rotationX: rx,-->
+<!--rotationY: ry,-->
+<!--rotationZ: ry,-->
+
+<!--z: 100,-->
+
+<!--alpha: 1,-->
+
+<!--ease: Cubic.easeOut-->
+
+<!--});-->
+
+<!--tl0.insert(tl1);-->
+
+<!--fragments.push(fragment);-->
+
+<!--container.appendChild(fragment.canvas);-->
+
+<!--}-->
+
+<!--}-->
+
+<!--function randomRange(min, max) {-->
+
+<!--return min + (max - min) * Math.random();-->
+
+<!--}-->
+
+<!--Fragment = function (v0, v1, v2, box) {-->
+
+<!--this.v0 = v0;-->
+
+<!--this.v1 = v1;-->
+
+<!--this.v2 = v2;-->
+
+<!--this.box = box;-->
+
+<!--this.canvas = document.createElement('canvas');-->
+
+<!--this.canvas.width = this.box.w;-->
+
+<!--this.canvas.height = this.box.h;-->
+
+<!--this.canvas.style.width = this.box.w + 'px';-->
+
+<!--this.canvas.style.height = this.box.h + 'px';-->
+
+<!--this.ctx = this.canvas.getContext('2d');-->
+
+<!--TweenMax.set(this.canvas, {-->
+
+<!--x: this.box.x,-->
+
+<!--y: this.box.y-->
+
+<!--});-->
+
+<!--this.ctx.translate(-this.box.x, -this.box.y);-->
+
+<!--this.ctx.beginPath();-->
+
+<!--this.ctx.moveTo(this.v0[0], this.v0[1]);-->
+
+<!--this.ctx.lineTo(this.v1[0], this.v1[1]);-->
+
+<!--this.ctx.lineTo(this.v2[0], this.v2[1]);-->
+
+<!--this.ctx.closePath();-->
+
+<!--this.ctx.clip();-->
+
+<!--this.ctx.drawImage(image, 0, 0);-->
+
+<!--};-->
+<!--</script>-->
+</body>
+</html>
