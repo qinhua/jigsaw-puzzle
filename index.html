@@ -1,448 +1,257 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>竞速拼车-赢门票</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="format-detection" content="email=no">
-    <meta name="description" content="竞速拼车-赢门票">
-    <script>
-        //动态计算字体尺寸
-        (function (doc, win) {
-            var docEl = doc.documentElement,
-                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-                    recalc = function () {
-                        var clientWidth = docEl.clientWidth;
-                        if (!clientWidth) return;
-                        var fz = 32 * (clientWidth / 720);
-                        fz = (fz > 32 ? 32 : fz);
-                        docEl.style.fontSize = fz + 'px';
-                        win._fz = fz;
-                    };
-            if (!doc.addEventListener) return;
-            recalc();
-            win.addEventListener(resizeEvt, recalc, false);
-            doc.addEventListener('DOMContentLoaded', recalc, false);
+<html lang="en">
 
-            window.recalc = recalc;
-        })(document, window);
-        //长链接专用
-        //        var _hmt = _hmt || [];
-        //        (function () {
-        //            var hm = document.createElement("script");
-        //            hm.src = "//hm.baidu.com/hm.js?7e0ac131f2f09d1952e26cafa158061a";
-        //            var s = document.getElementsByTagName("script")[0];
-        //            s.parentNode.insertBefore(hm, s);
-        //        })();
-        //短链接专用
-        //        var _hmt = _hmt || [];
-        //        (function () {
-        //            var hm = document.createElement("script");
-        //            hm.src = "//hm.baidu.com/hm.js?e8111e4e2c193acd79c65573f9b0a235";
-        //            var s = document.getElementsByTagName("script")[0];
-        //            s.parentNode.insertBefore(hm, s);
-        //        })();
-    </script>
-    <link rel="stylesheet" href="css/main.css">
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="http://share.m.kakamobi.com/m.resources.com/share-sdk-v2.0.js"></script>
-    <script>
-        //统计通用方法
-        function sta(adsName, pageName, eventName) {
-            window.mcShare.Statistic.event(adsName + "（" + pageName + "）-" + eventName);
-//            _hmt.push([adsName, adsName + '-' + pageName + '-' + eventName]);
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="keywords" content="html5, 拼图, 游戏">
+    <meta name="description" content="您的朋友们都在为梦想家园积极打拼，还等什么？快跟小伙伴们一起赢取免费海岛游，去看看未来的家！">
+    <title>拼图小游戏</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/rem.css">
+    <style type="text/css">
+    @media print {
+        #STTBimg {
+            display: none;
         }
-        //分享配置
-        window.mcShare.shareWord('竞速拼车-赢门票', {
-                    title: '竞速拼车-赢门票',
-                    description: '竞速拼车-赢门票',
-                    iconUrl: 'http://share.m.kakamobi.com/activity.kakamobi.com/jigsaw-puzzle-car-309/img/logo.png',
-                    url: 'http://share.m.kakamobi.com/activity.kakamobi.com/jigsaw-puzzle-car-309?shareProduct=jiakaobaodian&shareKey=jigsaw-puzzle-car-309&placeKey=jigsaw-puzzle-car-309'
-                },
-                function (status) {
-                }
-        );
-    </script>
-    <!--<script src="js/global-config.js"></script>-->
-    <!--<script src="http://static.kakamobi.com/asserts/javascript/mucang.webview.v4.3.min.js"></script>-->
+        #STTBimg2 {
+            display: none;
+        }
+    }
+    </style>
 </head>
+
 <body>
-<div class="container">
-    <!--page01-->
-    <div class="page page01 page-animate on">
-        <img class="topic" src="img/topic.png" alt="">
-        <!--<img class="sample-pic none" src="img/pic.jpg" id="src_img" alt="">-->
-        <!--<div id="scene" style="-webkit-perspective: 500px;"></div>-->
-        <img class="sample" src="img/cars.png" alt="">
-        <button type="button" class="btn btn-start">开始挑战</button>
-    </div>
-    <!--page02-->
-    <div class="page page02">
-        <div class="gap"></div>
-        <div class="title"></div>
-        <div class="swiper-container gallery">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img data-carId="29144" src="img/cb1.jpg" alt=""></div>
-                <div class="swiper-slide"><img data-carId="30568" src="img/cb2.jpg" alt=""></div>
-                <div class="swiper-slide"><img data-carId="23132" src="img/cb3.jpg" alt=""></div>
+<div class="page1">
+        <img src="img/tuzi.jpg" alt="兔子" style="opacity: 0;width: 0;height: 0;">
+        <!--<h2 class="page1-tit" id="pageTitle"></h2>-->
+        <button id="reset" class="game-reset-btn" disabled="">重新开始</button>
+        <div class="game-box">
+            <div class="game-pop-box ui-center play" id="layer">
+                <div class="game-warp">
+                    <div class="game-pop-hd">
+                        <h2>挑战失败！</h2>
+                        <p>再接再厉！</p>
+                    </div>
+                    <a href="javascript:;" class="game-start-btn play-btn" id="start">开始</a>
+                </div>
             </div>
-            <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-        <dl class="rules">
-            <dt></dt>
-            <dd><p>20S内将打乱的图块拼凑完成，即挑战成功。</p></dd>
-            <dd><p>成功试驾留资，即有机会获得2017上海国际车展门票。</p></dd>
-            <dd><p>获奖的用户我们会在活动结束的7个工作日内与您电话联系，并将门票寄给您。</p></dd>
-        </dl>
-        <button type="button" class="btn btn-challenge">我要挑战</button>
-    </div>
-    <!--page03-->
-    <div class="page page03">
-        <div class="gap"></div>
-        <div class="title"></div>
-        <div class="ques-num">
-            <ul class="timer">
-                <li>0</li>
-                <li>0</li>
-                <li class="dot">:</li>
-                <li></li>
-                <li></li>
-                <li class="sec">00</li>
+            <ul id="gameBox">
+                <li><img src="" alt="" data-seq="1"></li>
+                <li><img src="" alt="" data-seq="2"></li>
+                <li><img src="" alt="" data-seq="3"></li>
+                <li><img src="" alt="" data-seq="4"></li>
+                <li><img src="" alt="" data-seq="5"></li>
+                <li><img src="" alt="" data-seq="6"></li>
+                <li><img src="" alt="" data-seq="7"></li>
+                <li><img src="" alt="" data-seq="8"></li>
+                <li><img src="" alt="" data-seq="9"></li>
             </ul>
         </div>
-        <div id="game-section">
-            <button id="reset" class="game-reset-btn" disabled="">重新开始</button>
-            <div class="game-box">
-                <div class="game-pop-box ui-center play" id="layer">
-                    <div class="game-warp">
-                        <div class="game-pop-hd">
-                            <h2>挑战失败！</h2>
-                            <p>再接再厉！</p>
-                        </div>
-                        <a href="javascript:;" class="game-start-btn play-btn" id="start">开始</a>
-                    </div>
-                </div>
-                <ul id="sudoku">
-                    <li><img src="" alt=""></li>
-                    <li><img src="" alt="" ></li>
-                    <li><img src="" alt=""></li>
-                    <li><img src="" alt=""></li>
-                    <li><img src="" alt=""></li>
-                    <li><img src="" alt=""></li>
-                    <li><img src="" alt=""></li>
-                    <li><img src="" alt=""></li>
-                    <li><img src="" alt=""></li>
-                </ul>
-            </div>
-            <span class="play-time" id="timing">60.00</span>
-            <p class="pages">
-                第&nbsp;<strong id="level">1</strong>&nbsp;/&nbsp;<span id="levels">3</span> 关，
-                本关限时<span id="time">60.00</span>秒
-            </p>
-        </div>
-        <button type="button" class="btn btn-ok">我拼好啦</button>
-        <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
+        <span class="play-time" id="timing">60.00</span>
+        <p class="pages">
+            第&nbsp;<strong id="level">1</strong>&nbsp;/&nbsp;<span id="levels">3</span> 关， 本关限时
+            <span id="time">60.00</span>秒
+        </p>
     </div>
-    <!--page04-->
-    <div class="page page04">
-        <div class="seperator"></div>
-        <div class="title suc"></div>
-        <img class="tickets none" src="img/tickets.png" alt="">
-        <form action="#" class="form-con">
-            <div class="prmt-plugin-promote-main">
-                <div class="info-item clearfix">
-                    <label class="label-l">*姓名：</label>
-                    <div class="label-r">
-                        <input onblur="sta('竞速拼车-赢门票', '表单页','输入姓名');" id="userName" class="ipt long" type="text"
-                               name="userName" placeholder="真实姓名"/>
-                    </div>
-                </div>
-            </div>
-            <div class="prmt-plugin-promote-main">
-                <div class="info-item clearfix">
-                    <label class="label-l">*手机：</label>
-                    <div class="label-r">
-                        <input onblur="sta('竞速拼车-赢门票', '表单页','输入手机号');" id="userPhone" class="ipt long" type="tel"
-                               placeholder="手机号码" maxlength="11"/>
-                    </div>
-                </div>
-            </div>
-            <div class="agree-txt">
-                <input type="checkbox" id="agree" checked hidden>
-                <label for="agree"></label>
-                <p>同意经销商与您联系</p>
-            </div>
-            <!--<p class="sub-txt">您的个人资料将会提交至授权经销商，将有专门负责人邀您到店沟通购车事宜。</p>-->
-            <button type="button" class="btn btn-submit">提交信息</button>
-            <button type="button" class="btn btn-retry none">再玩一次</button>
-        </form>
-    </div>
-</div>
-<!--</div>-->
-<!--<div id="pop" class="pop pop-award on">-->
-<!--<div class="pop-out">-->
-<!--<div class="pop-in fadeInUp">-->
-<!--<div class="content overflow">-->
-<!--<div class="award-inner">-->
-<!--<img src="img/1.png" alt="" class="current-point">-->
-<!--<img src="img/title02.png" alt="" class="title-suc">-->
-<!--<img src="img/c1.png" alt="" class="current-car">-->
-<!--<div class="btn-group">-->
-<!--<img class="btn btn-coupon" src="img/btn_coupon.png" alt="">-->
-<!--<img class="btn btn-retry" src="img/btn_retry.png" alt="">-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<span class="js-closepop iconClose"><i>×</i></span></div>-->
-<!--</div>-->
-<!--</div>-->
-<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
-<script src="js/lib-lite.js"></script>
-<script src="js/vendor/zepto.js"></script>
-<script src="js/vendor/swiper.js"></script>
-<script src="js/vendor/TweenMax.js"></script>
-<script src="js/vendor/delaunay.js"></script>
-<script src="js/utilities.js"></script>
-<script src="js/main.js"></script>
-<!--<script>-->
-<!--// canvas settings-->
-<!--var imageWidth = 200,-->
-
-<!--imageHeight = 200;-->
-
-<!--var vertices = [],-->
-
-<!--indices,-->
-
-<!--boxes = [];-->
-
-<!--var image,-->
-
-<!--fragments = [],-->
-
-<!--container = document.getElementById('scene');-->
-
-<!--window.onload = function () {-->
-<!--image = document.getElementById('src_img');-->
-<!--if (image && container) {-->
-<!--triangulate();-->
-
-<!--makeBoxes();-->
-
-<!--makeFragments();-->
-<!--}-->
-<!--};-->
-
-<!--function triangulate() {-->
-
-<!--var x,-->
-
-<!--y,-->
-
-<!--dx = imageWidth / 5,-->
-
-<!--dy = imageHeight / 4,-->
-
-<!--offset = 1.2;-->
-
-<!--for (var i = 0; i <= imageWidth; i += dx) {-->
-
-<!--for (var j = 0; j <= imageHeight; j += dy) {-->
-
-<!--if (i && (i !== imageWidth)) x = i + randomRange(-dx * offset, dx * offset);-->
-
-<!--else x = i;-->
-
-<!--if (j && (j !== imageHeight)) y = j + randomRange(-dy * offset, dy * offset);-->
-
-<!--else y = j;-->
-
-<!--vertices.push([x, y]);-->
-
-<!--}-->
-
-<!--}-->
-
-<!--indices = Delaunay.triangulate(vertices);-->
-
-<!--}-->
-
-<!--function makeBoxes() {-->
-
-<!--var p0, p1, p2,-->
-
-<!--xMin, xMax,-->
-
-<!--yMin, yMax;-->
-
-<!--for (var i = 0; i < indices.length; i += 3) {-->
-
-<!--p0 = vertices[indices[i + 1]];-->
-
-<!--p1 = vertices[indices[i + 1]];-->
-
-<!--p2 = vertices[indices[i + 2]];-->
-
-<!--xMin = Math.min(p0[0], p1[0], p2[0]);-->
-
-<!--xMax = Math.max(p0[0], p1[0], p2[0]);-->
-
-<!--yMin = Math.min(p0[1], p1[1], p2[1]);-->
-
-<!--yMax = Math.max(p0[1], p1[1], p2[1]);-->
-
-<!--boxes.push({-->
-
-<!--x: xMin,-->
-
-<!--y: yMin,-->
-
-<!--w: xMax - xMin,-->
-
-<!--h: yMax - yMin-->
-
-<!--});-->
-
-<!--}-->
-
-<!--}-->
-
-<!--function makeFragments() {-->
-
-<!--var p0, p1, p2,-->
-
-<!--box,-->
-
-<!--fragment;-->
-
-<!--TweenMax.set(container, {perspective: 500});-->
-
-<!--var tl0 = new TimelineMax({repeat: 0});-->
-<!--for (var i = 0; i < indices.length; i += 3) {-->
-
-<!--p0 = vertices[indices[i + 0]];-->
-
-<!--p1 = vertices[indices[i + 1]];-->
-
-<!--p2 = vertices[indices[i + 2]];-->
-
-<!--box = boxes[i / 3];-->
-
-<!--fragment = new Fragment(p0, p1, p2, box);-->
-
-<!--var rx = randomRange(0, 60) * ((i % 2) ? 1 : -1);-->
-
-<!--var ry = randomRange(0, 60) * ((i % 2) ? -1 : 1);-->
-
-<!--var tl1 = new TimelineMax();-->
-
-<!--TweenMax.set(fragment.canvas, {-->
-<!--x: box.x * 2.5,-->
-<!--y: box.y,-->
-<!--alpha: 0-->
-<!--});-->
-
-<!--//            tl1.to(fragment.canvas, randomRange(0.9, 1.1), {-->
-<!--//-->
-<!--//                y: box.y,-->
-<!--////                x: box.x,-->
-<!--//                ease: Back.easeOut-->
-<!--//-->
-<!--//            });-->
-
-<!--tl1.to(fragment.canvas, 0.5, {-->
-
-<!--z: -100,-->
-
-<!--ease: Cubic.easeIn,-->
-
-<!--//                delay: 0.4-->
-
-<!--});-->
-
-<!--tl1.to(fragment.canvas, randomRange(.5, 2), {-->
-
-<!--rotationX: rx,-->
-<!--rotationY: ry,-->
-<!--rotationZ: ry,-->
-
-<!--z: 100,-->
-
-<!--alpha: 1,-->
-
-<!--ease: Cubic.easeOut-->
-
-<!--});-->
-
-<!--tl0.insert(tl1);-->
-
-<!--fragments.push(fragment);-->
-
-<!--container.appendChild(fragment.canvas);-->
-
-<!--}-->
-
-<!--}-->
-
-<!--function randomRange(min, max) {-->
-
-<!--return min + (max - min) * Math.random();-->
-
-<!--}-->
-
-<!--Fragment = function (v0, v1, v2, box) {-->
-
-<!--this.v0 = v0;-->
-
-<!--this.v1 = v1;-->
-
-<!--this.v2 = v2;-->
-
-<!--this.box = box;-->
-
-<!--this.canvas = document.createElement('canvas');-->
-
-<!--this.canvas.width = this.box.w;-->
-
-<!--this.canvas.height = this.box.h;-->
-
-<!--this.canvas.style.width = this.box.w + 'px';-->
-
-<!--this.canvas.style.height = this.box.h + 'px';-->
-
-<!--this.ctx = this.canvas.getContext('2d');-->
-
-<!--TweenMax.set(this.canvas, {-->
-
-<!--x: this.box.x,-->
-
-<!--y: this.box.y-->
-
-<!--});-->
-
-<!--this.ctx.translate(-this.box.x, -this.box.y);-->
-
-<!--this.ctx.beginPath();-->
-
-<!--this.ctx.moveTo(this.v0[0], this.v0[1]);-->
-
-<!--this.ctx.lineTo(this.v1[0], this.v1[1]);-->
-
-<!--this.ctx.lineTo(this.v2[0], this.v2[1]);-->
-
-<!--this.ctx.closePath();-->
-
-<!--this.ctx.clip();-->
-
-<!--this.ctx.drawImage(image, 0, 0);-->
-
-<!--};-->
-<!--</script>-->
+    <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
+    <script type="text/javascript" src="js/zepto.js"></script>
+    <script type="text/javascript">
+    var doc = document;
+    var canvas = doc.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var $gameBox = $('#gameBox');
+    var $lis = $gameBox.find('li');
+    var image = new Image();
+    var oriArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var imgArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var App = {
+        timeHandle: null,
+        isComplete: false,
+        level: 0,
+        levels: [{
+            time: "60.00",
+            image: "img/shulan.jpg"
+        }, {
+            time: "40.00",
+            image: "img/tuzi.jpg"
+        }, {
+            time: "30.00",
+            image: "img/together.jpg"
+        }],
+        bind: function() {
+            $('body').on('touchstart', function(e) {
+                e.preventDefault();
+            });
+            $lis.on('swipeLeft', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var index = $this.index();
+                var html = $this.html();
+                var $prev = $this.prev();
+                if ($.inArray(index, [3, 6]) > -1 || $prev.size() <= 0) {
+                    return false;
+                }
+                $this.html($prev.html());
+                $prev.html(html);
+                App.check();
+            });
+            $lis.on('swipeRight', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var index = $this.index();
+                var html = $this.html();
+                var $next = $this.next();
+                if ($.inArray(index, [2, 5]) > -1 || $next.size() <= 0) {
+                    return false;
+                }
+                $this.html($next.html());
+                $next.html(html);
+                App.check();
+            });
+            $lis.on('swipeUp', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var html = $this.html();
+                var index = $this.index() - 3;
+                var $up = $lis.eq(index);
+                if (index >= 0 && $up.size() > 0) {
+                    $this.html($up.html());
+                    $up.html(html);
+                    App.check();
+                }
+            });
+            $lis.on('swipeDown', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var html = $this.html();
+                var index = $this.index() + 3;
+                var $down = $lis.eq(index);
+                if (index < 9 && $down.size() > 0) {
+                    $this.html($down.html());
+                    $down.html(html);
+                    App.check();
+                }
+            });
+            $('#start').on('tap', function() {
+                $('#reset').prop('disabled', false);
+                //再来一次的时候 顺序不变哦
+                if ($(this).html() !== '再来一次') {
+                    App.randomImage(true);
+                } else {
+                    App.randomImage();
+                }
+                App.resetData();
+                App.countdown();
+                $('#layer').hide();
+            });
+            $('#reset').on('tap', function() {
+                App.resetData();
+                App.countdown();
+                App.randomImage(true);
+            });
+        },
+        countdown: function() {
+            clearInterval(this.timeHandle);
+            this.timeHandle = setInterval(function() {
+                var $time = $('#timing');
+                var time = parseFloat($time.text());
+                var currTime = (time - 0.01).toFixed(2);
+                if (currTime < 0) {
+                    clearInterval(App.timeHandle);
+                    $time.text(parseInt(currTime).toFixed(2));
+                    App.update();
+                } else {
+                    $time.text(currTime);
+                }
+            }, 10);
+        },
+        resetData: function() {
+            var time = this.levels[this.level].time;
+            $('#timing').text(time);
+            $('#time').text(time);
+            $('#level').text(this.level + 1);
+            $('#levels').text(this.levels.length);
+        },
+        init: function() {
+            $('#reset').prop('disabled', true);
+            this.resetData();
+            imgArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            this.render();
+        },
+        render: function() {
+            image.onload = function() {
+                App.randomImage();
+            }
+            image.src = this.levels[this.level].image;
+        },
+        randomImage: function(flag) {
+            flag = flag || false;
+            if (flag) {
+                imgArr.sort(function(a, b) {
+                    return Math.random() - Math.random();
+                });
+            }
+            var index = 1;
+            for (var i = 0; i < 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    ctx.drawImage(image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
+                    $lis.eq(imgArr[index - 1] - 1).find('img').attr({'data-seq':index,'src': canvas.toDataURL('image/jpeg')});
+                    index++;
+                }
+            }
+        },
+        check: function() {
+            var resArr = [];
+            $('#gameBox img').each(function(k, v) {
+                resArr.push(v.getAttribute("data-seq"));
+            });
+            if (resArr.join("") === oriArr.join("")) {
+                setTimeout(function() {
+                    //App.isComplete = true;
+                    window.clearInterval(App.timeHandle);
+                    if (App.level >= App.levels.length - 1) {
+                        alert("哇塞,你居然通关了,好棒!");
+                        App.destory();
+                    } else {
+                        if (confirm("恭喜过关,是否继续挑战?")) {
+                            App.level++;
+                            $('#layer').show();
+                            App.init();
+                        }
+                    }
+                }, 300);
+            }
+        },
+        update: function() {
+            if (this.isComplete === false) {
+                alert("时间到,游戏结束!");
+                $('#layer').show();
+                $('#start').html("再来一次");
+                $('#reset').prop('disabled', true);
+            }
+        },
+        destory: function() {
+            $('#reset').prop('disabled', true);
+            $lis.off("swipeLeft");
+            $lis.off("swipeRight");
+            $lis.off("swipeUp");
+            $lis.off("swipeDown");
+            $lis.css('border', 0);
+            $gameBox.css('border', 0);
+        },
+        start: function() {
+            this.init();
+            this.render();
+            this.bind();
+        },
+    };
+    App.start();
+    </script>
 </body>
+
 </html>
